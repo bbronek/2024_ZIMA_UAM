@@ -1,14 +1,16 @@
 package pl.psi.specialfields;
 
+import pl.psi.creatures.Creature;
+
 public class SpecialField implements SpecialFieldIf {
     private final boolean isMovePossible;
     private final boolean isAttackPossible;
 
     private final boolean isAttackable;
-    private final int hp;
+    private int hp;
     private final int damage;
 
-    private final int amount;
+    private int amount;
     private final String name;
 
     private SpecialField(boolean isMovePossible, boolean isAttackPossible, boolean isAttackable, int hp, int damage, int amount, String name) {
@@ -53,6 +55,32 @@ public class SpecialField implements SpecialFieldIf {
 
     @Override
     public int getAmount() { return amount; }
+
+    public void setCurrentHp(final int currentHp) {
+        hp = currentHp;
+    }
+
+    public void setAmount(final int currentAmount) {
+        amount = currentAmount;
+    }
+
+    public void applyCreatureDamage(final SpecialField aSpecialField, final int aDamage) {
+        int hpToSubstract = aDamage % aSpecialField.getHp();
+        int amountToSubstract = Math.round((float) aDamage / aSpecialField.getHp());
+        int hp = aSpecialField.getHp() - hpToSubstract;
+
+        if (hp <= 0) {
+            aSpecialField.setAmount(aSpecialField.getAmount() - 1);
+        }
+        else{
+            aSpecialField.setCurrentHp(hp);
+        }
+        aSpecialField.setAmount(aSpecialField.getAmount() - amountToSubstract);
+    }
+
+    public boolean isAlive() {
+        return getAmount() > 0;
+    }
 
     public static Builder builder() {
         return new Builder();

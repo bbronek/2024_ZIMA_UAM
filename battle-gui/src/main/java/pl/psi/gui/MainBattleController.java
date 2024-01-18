@@ -59,7 +59,11 @@ public class MainBattleController implements PropertyChangeListener {
                 if (gameEngine.canAttack(currentPoint)) {
                     mapTile.setBackground(Color.RED);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        gameEngine.attack(currentPoint);
+                        specialField.ifPresent(gameEngine::attackSpecialField);
+
+                        if (!specialField.isPresent()) {
+                            gameEngine.attack(currentPoint);
+                        }
                     });
                 }
                 if (gameEngine.isSpecialFieldADamageObstacle(currentPoint)) {

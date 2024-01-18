@@ -16,6 +16,7 @@ import pl.psi.TurnQueue;
 import com.google.common.collect.Range;
 
 import lombok.Getter;
+import pl.psi.specialfields.SpecialField;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -47,6 +48,15 @@ public class Creature implements PropertyChangeListener {
             if (canCounterAttack(aDefender)) {
                 counterAttack(aDefender);
             }
+        }
+    }
+
+    public void attackSpecialField(final SpecialField aSpecialField, final Creature aCreature) {
+        if (isAlive() && aSpecialField.isAlive()) {
+            final int aCreatureDamage = getCalculator().calculateDamage(this, aCreature);
+            final int aSpecialFieldDamage = aSpecialField.getDamage();
+            applyDamage(aCreature, aSpecialFieldDamage);
+            aSpecialField.applyCreatureDamage(aSpecialField, aCreatureDamage);
         }
     }
 

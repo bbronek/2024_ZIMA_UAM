@@ -6,6 +6,7 @@ public interface SpecialFieldIf {
 
     boolean isAttackable();
     int getHp();
+
     String getName();
     int getDamage();
 

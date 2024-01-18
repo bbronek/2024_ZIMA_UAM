@@ -30,6 +30,12 @@ public class GameEngine {
         pass();
     }
 
+    public void attackSpecialField(final SpecialField aSpecialField) {
+        Creature aCreature = turnQueue.getCurrentCreature();
+        aCreature.attackSpecialField(aSpecialField, aCreature);
+        pass();
+    }
+
     public void applySpecialFieldAttack(final Point point, int damage) {
         board.getCreature(point)
                 .ifPresent(defender -> turnQueue.getCurrentCreature()
