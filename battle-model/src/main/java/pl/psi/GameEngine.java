@@ -66,8 +66,8 @@ public class GameEngine {
     public boolean canAttack(final Point point) {
         double distance = board.getPosition(turnQueue.getCurrentCreature())
                 .distance(point);
-        return board.getCreature(point)
-                .isPresent()
+        return (board.getCreature(point)
+                .isPresent() || isSpecialFieldAttackable(point))
                 && distance < 2 && distance > 0;
     }
 
@@ -81,6 +81,18 @@ public class GameEngine {
                 );
 
         return isDamageObstacle.get();
+    }
+
+    public boolean isSpecialFieldAttackable(final Point point) {
+        AtomicBoolean isSpecialFieldAttackable = new AtomicBoolean(false);
+
+        board.getSpecialField(point)
+                .ifPresentOrElse(
+                        specialField -> isSpecialFieldAttackable.set(specialField.isAttackable()),
+                        () -> {}
+                );
+
+        return isSpecialFieldAttackable.get();
     }
 
     public boolean isCurrentCreature(Point aPoint) {
