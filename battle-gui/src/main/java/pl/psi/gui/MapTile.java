@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pl.psi.creatures.Creature;
+import pl.psi.specialfields.SpecialField;
 
 import java.io.InputStream;
 
@@ -32,6 +33,29 @@ class MapTile extends StackPane {
         imageView.setImage(image);
 
         Label label = new Label(aCreature.getAmount() + " ");
+        label.setAlignment(Pos.BOTTOM_RIGHT);
+        label.setMaxWidth(Double.MAX_VALUE);
+        label.setMaxHeight(Double.MAX_VALUE);
+        label.setStyle("-fx-font-weight: bold");
+
+        getChildren().add(imageView);
+        getChildren().add(label);
+    }
+
+    void setSpecialField(final SpecialField aSpecialField) {
+        InputStream stream = getClass().getClassLoader().getResourceAsStream("fields/" + aSpecialField.getName() + ".png");
+        Image image = new Image(stream, 100, 100, false, false);
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(RECTANGLE_SIZE);
+        imageView.setFitWidth(RECTANGLE_SIZE);
+        imageView.setImage(image);
+
+        Label label = new Label("");
+
+        if (aSpecialField.isAttackable()) {
+            label = new Label(aSpecialField.getAmount() + " ");
+        }
+
         label.setAlignment(Pos.BOTTOM_RIGHT);
         label.setMaxWidth(Double.MAX_VALUE);
         label.setMaxHeight(Double.MAX_VALUE);
