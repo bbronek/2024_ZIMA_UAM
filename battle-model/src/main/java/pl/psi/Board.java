@@ -56,10 +56,17 @@ public class Board
 
     boolean canMove( final Creature aCreature, final Point aPoint )
     {
-        if( map.containsKey( aPoint ) )
+        boolean canMoveOnSpecialField = true;
+
+        if( specialFieldsMap.containsKey( aPoint)) {
+            canMoveOnSpecialField = specialFieldsMap.get(aPoint).isMovePossible();
+        }
+
+        if( map.containsKey( aPoint ) || !canMoveOnSpecialField)
         {
             return false;
         }
+
         final Point oldPosition = getPosition( aCreature );
         return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
     }
