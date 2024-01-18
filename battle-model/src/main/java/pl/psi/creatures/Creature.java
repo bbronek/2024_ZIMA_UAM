@@ -50,6 +50,12 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
+    public void applyObstacleDamage(int damage) {
+        if(isAlive()) {
+            applyDamage(this, damage);
+        }
+    }
+
     public boolean isAlive() {
         return getAmount() > 0;
     }

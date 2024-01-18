@@ -15,6 +15,7 @@ import pl.psi.specialfields.SpecialField;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainBattleController implements PropertyChangeListener {
     private final GameEngine gameEngine;
@@ -59,6 +60,14 @@ public class MainBattleController implements PropertyChangeListener {
                     mapTile.setBackground(Color.RED);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         gameEngine.attack(currentPoint);
+                    });
+                }
+                if (gameEngine.isSpecialFieldADamageObstacle(currentPoint)) {
+                    AtomicInteger damage = new AtomicInteger(0);
+                    specialField.ifPresent(field -> damage.set(field.getDamage()));
+
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        gameEngine.applySpecialFieldAttack(currentPoint, damage.get());
                     });
                 }
                 gridMap.add(mapTile, x, y);

@@ -3,6 +3,7 @@ package pl.psi;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import pl.psi.creatures.Creature;
 import pl.psi.specialfields.SpecialField;
@@ -27,6 +28,13 @@ public class GameEngine {
                 .ifPresent(defender -> turnQueue.getCurrentCreature()
                         .attack(defender));
         pass();
+    }
+
+    public void applySpecialFieldAttack(final Point point, int damage) {
+        board.getCreature(point)
+                .ifPresent(defender -> turnQueue.getCurrentCreature()
+                        .applyObstacleDamage(damage)
+                );
     }
 
     public boolean canMove(final Point aPoint) {
@@ -61,6 +69,18 @@ public class GameEngine {
         return board.getCreature(point)
                 .isPresent()
                 && distance < 2 && distance > 0;
+    }
+
+    public boolean isSpecialFieldADamageObstacle(final Point point) {
+        AtomicBoolean isDamageObstacle = new AtomicBoolean(false);
+
+        board.getSpecialField(point)
+                .ifPresentOrElse(
+                        specialField -> isDamageObstacle.set(specialField.isAttackPossible() && !specialField.isAttackable()),
+                        () -> {}
+                );
+
+        return isDamageObstacle.get();
     }
 
     public boolean isCurrentCreature(Point aPoint) {
