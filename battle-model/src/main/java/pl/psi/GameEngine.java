@@ -5,6 +5,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.Optional;
 
 import pl.psi.creatures.Creature;
+import pl.psi.specialfields.SpecialField;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -39,6 +40,10 @@ public class GameEngine {
 
     public Optional<Creature> getCreature(final Point aPoint) {
         return board.getCreature(aPoint);
+    }
+
+    public Optional<SpecialField> getSpecialField(final Point aPoint) {
+        return board.getSpecialField(aPoint);
     }
 
     public void pass() {

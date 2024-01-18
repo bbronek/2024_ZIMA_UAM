@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import pl.psi.creatures.Creature;
+import pl.psi.specialfields.SpecialField;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -40,8 +41,11 @@ public class MainBattleController implements PropertyChangeListener {
             for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
                 Optional<Creature> creature = gameEngine.getCreature(currentPoint);
+                Optional<SpecialField> specialField = gameEngine.getSpecialField(currentPoint);
+
                 final MapTile mapTile = new MapTile();
                 creature.ifPresent(mapTile::setCreature);
+                specialField.ifPresent(mapTile::setSpecialField);
                 if (gameEngine.isCurrentCreature(currentPoint)) {
                     mapTile.setBackground(Color.GREENYELLOW);
                 }

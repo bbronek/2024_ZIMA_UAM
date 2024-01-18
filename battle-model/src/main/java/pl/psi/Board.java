@@ -7,6 +7,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 import pl.psi.creatures.Creature;
+import pl.psi.specialfields.SpecialField;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -34,6 +35,7 @@ public class Board
     {
         return Optional.ofNullable( map.get( aPoint ) );
     }
+    Optional< SpecialField > getSpecialField(final Point aPoint ) { return Optional.ofNullable( specialFieldsMap.get( aPoint ) ); }
 
     void move( final Creature aCreature, final Point aPoint )
     {
