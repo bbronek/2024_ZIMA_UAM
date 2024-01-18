@@ -9,6 +9,7 @@ public class SpecialFieldFactory {
                 .setName(statistics.getName())
                 .setHealthPoints(statistics.getHp())
                 .setDamage(statistics.getDamage())
+                .setAmount(statistics.getAmount())
                 .build();
     }
 }
