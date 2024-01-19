@@ -8,7 +8,7 @@ import java.util.*;
 public class SpecialFieldGenerator {
     private static final int MAX_WIDTH = 14;
     private static final int MAX_HEIGHT = 9;
-    private static final int MAX_SPECIAL_FIELDS = 10;
+    private static final int MAX_SPECIAL_FIELDS = 20;
 
     private static final Set<SpecialFieldsStatistics> AVAILABLE_SPECIAL_FIELDS =
             EnumSet.of(SpecialFieldsStatistics.LAVA, SpecialFieldsStatistics.ROCK, SpecialFieldsStatistics.GUARD,
@@ -17,7 +17,7 @@ public class SpecialFieldGenerator {
     public static void generateRandomSpecialFields(HashMap<Point, SpecialField> specialFieldsMap, BiMap<Point, Creature> creaturesMap) {
         Random random = new Random();
 
-        int numberOfSpecialFields = random.nextInt(MAX_SPECIAL_FIELDS) + 1;
+        int numberOfSpecialFields = random.nextInt(MAX_SPECIAL_FIELDS) + 10;
 
         for (int i = 0; i < numberOfSpecialFields; ++i) {
             SpecialFieldsStatistics randomSpecialFieldType = getRandomSpecialFieldType(random);

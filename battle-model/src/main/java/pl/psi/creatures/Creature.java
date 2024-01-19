@@ -74,7 +74,6 @@ public class Creature implements PropertyChangeListener {
             if (specialField.isMoveRangeDebuffPossible()) {
                 applyMoveRangeDebuff();
             } else if (specialField.isMoveRangeBuffPossible()) {
-                System.out.println("AA");
                 applyMoveRangeBuff();
             }
         }
