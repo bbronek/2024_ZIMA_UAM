@@ -101,7 +101,7 @@ public class GameEngine {
 
         board.getSpecialField(point)
                 .ifPresentOrElse(
-                        specialField -> isABuffOrDebuff.set(specialField.isMoveRangeDebuffPossible()),
+                        specialField -> isABuffOrDebuff.set(specialField.isMoveRangeDebuffPossible() || specialField.isMoveRangeBuffPossible()),
                         () -> {}
                 );
 

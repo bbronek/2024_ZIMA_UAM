@@ -5,6 +5,7 @@ public class SpecialField implements SpecialFieldIf {
     private final boolean isAttackPossible;
     private final boolean isAttackable;
     private final boolean isMoveRangeDebuffPossible;
+    private final boolean isMoveRangeBuffPossible;
 
     private int hp;
     private final int damage;
@@ -12,11 +13,12 @@ public class SpecialField implements SpecialFieldIf {
     private int amount;
     private final String name;
 
-    private SpecialField(boolean isMovePossible, boolean isAttackPossible, boolean isAttackable, boolean isMoveRangeDebuffPossible, int hp, int damage, int amount, String name) {
+    private SpecialField(boolean isMovePossible, boolean isAttackPossible, boolean isAttackable, boolean isMoveRangeDebuffPossible, boolean isMoveRangeBuffPossible, int hp, int damage, int amount, String name) {
         this.isMovePossible = isMovePossible;
         this.isAttackPossible = isAttackPossible;
         this.isAttackable = isAttackable;
         this.isMoveRangeDebuffPossible = isMoveRangeDebuffPossible;
+        this.isMoveRangeBuffPossible = isMoveRangeBuffPossible;
         this.hp = hp;
         this.damage = damage;
         this.amount = amount;
@@ -40,6 +42,9 @@ public class SpecialField implements SpecialFieldIf {
 
     @Override
     public boolean isMoveRangeDebuffPossible() { return isMoveRangeDebuffPossible; }
+
+    @Override
+    public boolean isMoveRangeBuffPossible() { return isMoveRangeBuffPossible; }
 
     @Override
     public int getHp() {
@@ -96,6 +101,7 @@ public class SpecialField implements SpecialFieldIf {
         private boolean isAttackable;
 
         private boolean isMoveRangeDebuffPossible;
+        private boolean isMoveRangeBuffPossible;
 
         private int hp;
 
@@ -123,6 +129,11 @@ public class SpecialField implements SpecialFieldIf {
             return this;
         }
 
+        public Builder setMoveRangeBuff(boolean isMoveRangeBuffPossible) {
+            this.isMoveRangeBuffPossible = isMoveRangeBuffPossible;
+            return this;
+        }
+
         public Builder setHealthPoints(int healthPoints) {
             this.hp = healthPoints;
             return this;
@@ -145,7 +156,7 @@ public class SpecialField implements SpecialFieldIf {
         }
 
         public SpecialField build() {
-            return new SpecialField(isMovePossible, isAttackPossible, isAttackable, isMoveRangeDebuffPossible, hp, damage, amount, name);
+            return new SpecialField(isMovePossible, isAttackPossible, isAttackable, isMoveRangeDebuffPossible, isMoveRangeBuffPossible, hp, damage, amount, name);
         }
     }
 

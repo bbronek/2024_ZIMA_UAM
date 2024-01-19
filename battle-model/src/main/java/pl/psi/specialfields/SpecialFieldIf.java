@@ -8,6 +8,8 @@ public interface SpecialFieldIf {
 
     boolean isMoveRangeDebuffPossible();
 
+    boolean isMoveRangeBuffPossible();
+
     int getHp();
 
     String getName();
