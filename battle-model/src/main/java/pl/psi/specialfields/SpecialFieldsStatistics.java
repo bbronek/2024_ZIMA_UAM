@@ -3,7 +3,7 @@ package pl.psi.specialfields;
 public enum SpecialFieldsStatistics implements SpecialFieldIf {
     LAVA("Lava", true, false, true, false, false, 0, 10, 0),
     ROCK("Rock", false, false, false, false, false, 0, 0, 0),
-    GUARD("Guard", true, true, false, false,false, 5, 10, 3),
+    GUARD("Guard", true, true, false, false,false, 5, 15, 3),
     SWAMP("Swamp", false, false, true, true,false, 0, 0, 0),
     FOUNTAIN("Fountain", false, false, true, false,true, 0, 0, 0);
 
