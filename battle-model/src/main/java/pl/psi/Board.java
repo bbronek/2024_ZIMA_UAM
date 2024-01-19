@@ -10,6 +10,7 @@ import com.google.common.collect.HashBiMap;
 import pl.psi.creatures.Creature;
 import pl.psi.specialfields.SpecialField;
 import pl.psi.specialfields.SpecialFieldFactory;
+import pl.psi.specialfields.SpecialFieldGenerator;
 import pl.psi.specialfields.SpecialFieldsStatistics;
 
 /**
@@ -25,11 +26,13 @@ public class Board
     {
         addCreatures( aCreatures1, 0 );
         addCreatures( aCreatures2, MAX_WITDH );
-        specialFieldsMap.put(new Point(2, 3), SpecialFieldFactory.create(SpecialFieldsStatistics.LAVA));
-        specialFieldsMap.put(new Point(2, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.ROCK));
-        specialFieldsMap.put(new Point(5, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.GUARD));
-        specialFieldsMap.put(new Point(8, 7), SpecialFieldFactory.create(SpecialFieldsStatistics.SWAMP));
-        specialFieldsMap.put(new Point(7, 9), SpecialFieldFactory.create(SpecialFieldsStatistics.FOUNTAIN));
+//        specialFieldsMap.put(new Point(2, 3), SpecialFieldFactory.create(SpecialFieldsStatistics.LAVA));
+//        specialFieldsMap.put(new Point(2, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.ROCK));
+//        specialFieldsMap.put(new Point(5, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.GUARD));
+//        specialFieldsMap.put(new Point(8, 7), SpecialFieldFactory.create(SpecialFieldsStatistics.SWAMP));
+//        specialFieldsMap.put(new Point(7, 9), SpecialFieldFactory.create(SpecialFieldsStatistics.FOUNTAIN));
+
+        SpecialFieldGenerator.generateRandomSpecialFields(specialFieldsMap, map);
     }
 
     private void addCreatures( final List< Creature > aCreatures, final int aXPosition )
