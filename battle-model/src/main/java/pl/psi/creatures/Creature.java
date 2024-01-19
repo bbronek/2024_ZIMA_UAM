@@ -115,7 +115,7 @@ public class Creature implements PropertyChangeListener {
         currentHp = aCurrentHp;
     }
 
-    protected void setMoveRange(final int aMoveRange) {
+    public void setMoveRange(final int aMoveRange) {
         moveRange = aMoveRange;
     }
 
