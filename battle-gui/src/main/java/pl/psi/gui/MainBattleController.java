@@ -59,11 +59,10 @@ public class MainBattleController implements PropertyChangeListener {
                 if (gameEngine.canAttack(currentPoint)) {
                     mapTile.setBackground(Color.RED);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        specialField.ifPresent(gameEngine::attackSpecialField);
-
-                        if (!specialField.isPresent()) {
-                            gameEngine.attack(currentPoint);
-                        }
+                        specialField.ifPresentOrElse(
+                                gameEngine::attackSpecialField,
+                                () -> gameEngine.attack(currentPoint)
+                        );
                     });
                 }
                 if (gameEngine.isSpecialFieldADamageObstacle(currentPoint)) {
@@ -72,6 +71,11 @@ public class MainBattleController implements PropertyChangeListener {
 
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         gameEngine.applySpecialFieldAttack(currentPoint, damage.get());
+                    });
+                }
+                if (gameEngine.isSpecialFieldABuffOrDebuff(currentPoint)) {
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        specialField.ifPresent(sf -> gameEngine.applyBuffOrDebuff(currentPoint, sf));
                     });
                 }
                 gridMap.add(mapTile, x, y);

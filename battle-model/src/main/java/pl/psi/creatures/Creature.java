@@ -30,6 +30,8 @@ public class Creature implements PropertyChangeListener {
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
 
+    private int moveRange;
+
     Creature() {
     }
 
@@ -39,6 +41,7 @@ public class Creature implements PropertyChangeListener {
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
+        moveRange = stats.getMoveRange();
     }
 
     public void attack(final Creature aDefender) {
@@ -66,6 +69,25 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
+    public void applyBuffOrDebuff(final SpecialField specialField) {
+        if (isAlive()) {
+            if (specialField.isMoveRangeDebuffPossible()) {
+                applyMoveRangeDebuff();
+            } else if (specialField.isMoveRangeBuffPossible()) {
+                applyMoveRangeBuff();
+            }
+        }
+    }
+
+    private void applyMoveRangeDebuff() {
+        setMoveRange((int) Math.floor(getMoveRange() * 0.5));
+    }
+
+    private void applyMoveRangeBuff() {
+        setMoveRange((int) Math.floor(getMoveRange() * 2.0));
+
+    }
+
     public boolean isAlive() {
         return getAmount() > 0;
     }
@@ -91,6 +113,10 @@ public class Creature implements PropertyChangeListener {
 
     protected void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
+    }
+
+    protected void setMoveRange(final int aMoveRange) {
+        moveRange = aMoveRange;
     }
 
     private boolean canCounterAttack(final Creature aDefender) {
@@ -132,7 +158,7 @@ public class Creature implements PropertyChangeListener {
     }
 
     public int getMoveRange() {
-        return stats.getMoveRange();
+        return moveRange;
     }
 
     public static class Builder {

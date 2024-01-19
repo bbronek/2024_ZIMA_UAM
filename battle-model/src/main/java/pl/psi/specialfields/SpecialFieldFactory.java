@@ -6,6 +6,7 @@ public class SpecialFieldFactory {
                 .setMovePossible(statistics.isMovePossible())
                 .setAttackPossible(statistics.isAttackPossible())
                 .setAttackable(statistics.isAttackable())
+                .setMoveRangeDebuff(statistics.isMoveRangeDebuffPossible())
                 .setName(statistics.getName())
                 .setHealthPoints(statistics.getHp())
                 .setDamage(statistics.getDamage())

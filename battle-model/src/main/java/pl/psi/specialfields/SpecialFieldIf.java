@@ -5,6 +5,9 @@ public interface SpecialFieldIf {
     boolean isAttackPossible();
 
     boolean isAttackable();
+
+    boolean isMoveRangeDebuffPossible();
+
     int getHp();
 
     String getName();

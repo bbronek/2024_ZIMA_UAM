@@ -1,22 +1,22 @@
 package pl.psi.specialfields;
 
-import pl.psi.creatures.Creature;
-
 public class SpecialField implements SpecialFieldIf {
     private final boolean isMovePossible;
     private final boolean isAttackPossible;
-
     private final boolean isAttackable;
+    private final boolean isMoveRangeDebuffPossible;
+
     private int hp;
     private final int damage;
 
     private int amount;
     private final String name;
 
-    private SpecialField(boolean isMovePossible, boolean isAttackPossible, boolean isAttackable, int hp, int damage, int amount, String name) {
+    private SpecialField(boolean isMovePossible, boolean isAttackPossible, boolean isAttackable, boolean isMoveRangeDebuffPossible, int hp, int damage, int amount, String name) {
         this.isMovePossible = isMovePossible;
         this.isAttackPossible = isAttackPossible;
         this.isAttackable = isAttackable;
+        this.isMoveRangeDebuffPossible = isMoveRangeDebuffPossible;
         this.hp = hp;
         this.damage = damage;
         this.amount = amount;
@@ -37,6 +37,9 @@ public class SpecialField implements SpecialFieldIf {
     public boolean isAttackable() {
         return isAttackable;
     }
+
+    @Override
+    public boolean isMoveRangeDebuffPossible() { return isMoveRangeDebuffPossible; }
 
     @Override
     public int getHp() {
@@ -91,6 +94,9 @@ public class SpecialField implements SpecialFieldIf {
         private boolean isAttackPossible;
 
         private boolean isAttackable;
+
+        private boolean isMoveRangeDebuffPossible;
+
         private int hp;
 
         private int damage;
@@ -109,6 +115,11 @@ public class SpecialField implements SpecialFieldIf {
 
         public Builder setAttackable(boolean isAttackable) {
             this.isAttackable = isAttackable;
+            return this;
+        }
+
+        public Builder setMoveRangeDebuff(boolean isMoveRangeDebuffPossible) {
+            this.isMoveRangeDebuffPossible = isMoveRangeDebuffPossible;
             return this;
         }
 
@@ -134,7 +145,7 @@ public class SpecialField implements SpecialFieldIf {
         }
 
         public SpecialField build() {
-            return new SpecialField(isMovePossible, isAttackPossible, isAttackable, hp, damage, amount, name);
+            return new SpecialField(isMovePossible, isAttackPossible, isAttackable, isMoveRangeDebuffPossible, hp, damage, amount, name);
         }
     }
 

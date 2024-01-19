@@ -43,6 +43,13 @@ public class GameEngine {
                 );
     }
 
+    public void applyBuffOrDebuff(final Point point, final SpecialField aSpecialField) {
+        board.getCreature(point)
+                .ifPresent(aCreature -> turnQueue.getCurrentCreature()
+                        .applyBuffOrDebuff(aSpecialField)
+                );
+    }
+
     public boolean canMove(final Point aPoint) {
         return board.canMove(turnQueue.getCurrentCreature(), aPoint);
     }
@@ -88,6 +95,19 @@ public class GameEngine {
 
         return isDamageObstacle.get();
     }
+
+    public boolean isSpecialFieldABuffOrDebuff(final Point point) {
+        AtomicBoolean isABuffOrDebuff = new AtomicBoolean(false);
+
+        board.getSpecialField(point)
+                .ifPresentOrElse(
+                        specialField -> isABuffOrDebuff.set(specialField.isMoveRangeDebuffPossible()),
+                        () -> {}
+                );
+
+        return isABuffOrDebuff.get();
+    }
+
 
     public boolean isSpecialFieldAttackable(final Point point) {
         AtomicBoolean isSpecialFieldAttackable = new AtomicBoolean(false);

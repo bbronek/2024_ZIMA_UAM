@@ -28,6 +28,7 @@ public class Board
         specialFieldsMap.put(new Point(2, 3), SpecialFieldFactory.create(SpecialFieldsStatistics.LAVA));
         specialFieldsMap.put(new Point(2, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.ROCK));
         specialFieldsMap.put(new Point(5, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.GUARD));
+        specialFieldsMap.put(new Point(8, 7), SpecialFieldFactory.create(SpecialFieldsStatistics.SWAMP));
     }
 
     private void addCreatures( final List< Creature > aCreatures, final int aXPosition )
