@@ -26,12 +26,6 @@ public class Board
     {
         addCreatures( aCreatures1, 0 );
         addCreatures( aCreatures2, MAX_WITDH );
-//        specialFieldsMap.put(new Point(2, 3), SpecialFieldFactory.create(SpecialFieldsStatistics.LAVA));
-//        specialFieldsMap.put(new Point(2, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.ROCK));
-//        specialFieldsMap.put(new Point(5, 5), SpecialFieldFactory.create(SpecialFieldsStatistics.GUARD));
-//        specialFieldsMap.put(new Point(8, 7), SpecialFieldFactory.create(SpecialFieldsStatistics.SWAMP));
-//        specialFieldsMap.put(new Point(7, 9), SpecialFieldFactory.create(SpecialFieldsStatistics.FOUNTAIN));
-
         SpecialFieldGenerator.generateRandomSpecialFields(specialFieldsMap, map);
     }
 
